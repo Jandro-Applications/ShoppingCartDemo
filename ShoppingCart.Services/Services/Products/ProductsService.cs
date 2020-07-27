@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ShoppingCart.Services.Services.Products
 {
-    public class ProductsService : BaseService, IProductService
+    public class ProductsService : BaseService, IProductsService
     {
         private List<Product> _products = null;
 

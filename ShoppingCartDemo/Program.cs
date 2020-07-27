@@ -1,4 +1,7 @@
-﻿using ShoppingCart.Services.Models.Product;
+﻿using Microsoft.Extensions.DependencyInjection;
+using ShoppingCart.Services.Interfaces.Products;
+using ShoppingCart.Services.Interfaces.ShoppingCart;
+using ShoppingCart.Services.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +12,17 @@ namespace ShoppingCartDemo
     {
         static void Main(string[] args)
         {
+            IServiceCollection services = new ServiceCollection();
+            Startup startup = new Startup();
+            startup.ConfigureServices(services);
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            List<Product> products = null;
+            var productsService = serviceProvider.GetService<IProductsService>();
+            List<Product> products = productsService.GetAll();
 
             DisplayMenu(products);
+
+            var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
 
             int userInput = 0;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ShoppingCart.Services.Interfaces.Products
 {
-    public interface IProductService
+    public interface IProductsService
     {
         List<Product> GetAll();
         Product GetById(Guid id);
