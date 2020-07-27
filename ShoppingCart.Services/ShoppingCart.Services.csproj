@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\ShoppingCart\" />
+    <Folder Include="Interfaces\Product\" />
+    <Folder Include="Models\ShoppingCart\" />
+    <Folder Include="Models\Product\" />
+    <Folder Include="Services\ShoppingCart\" />
+    <Folder Include="Services\Product\" />
+  </ItemGroup>
+
+</Project>
