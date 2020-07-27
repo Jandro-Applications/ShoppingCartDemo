@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\ShoppingCart\" />
-    <Folder Include="Interfaces\Product\" />
-    <Folder Include="Models\ShoppingCart\" />
-    <Folder Include="Models\Product\" />
-    <Folder Include="Services\ShoppingCart\" />
-    <Folder Include="Services\Product\" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.6" />
   </ItemGroup>
 
 </Project>

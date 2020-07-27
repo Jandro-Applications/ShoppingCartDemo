@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingCart.Services\ShoppingCart.Services.csproj" />
+  </ItemGroup>
+
 </Project>
