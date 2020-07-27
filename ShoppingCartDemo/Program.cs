@@ -12,10 +12,8 @@ namespace ShoppingCartDemo
     {
         static void Main(string[] args)
         {
-            IServiceCollection services = new ServiceCollection();
-            Startup startup = new Startup();
-            startup.ConfigureServices(services);
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            var serviceProvider = InitializeStartup();
 
             var productsService = serviceProvider.GetService<IProductsService>();
             List<Product> products = productsService.GetAll();
@@ -33,6 +31,32 @@ namespace ShoppingCartDemo
                 try
                 {
                     userInput = Convert.ToInt32(result);
+
+                    var product = products.FirstOrDefault(x => x.Code == userInput);
+
+                    if (product != null)
+                    {
+                        if (shoppingCartService.AddToCart(product))
+                        {
+                            Console.WriteLine("Product added succesfully");
+                        }
+                    }
+                    else
+                    {
+                        if (userInput == 99)
+                        {
+                            shoppingCartService.Get();
+                        }
+                        else if (userInput == 999)
+                        {
+                            Console.WriteLine("Bye!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not valid code for article or menu item");
+                        }
+
+                    }
                 }
                 catch (Exception)
                 {
@@ -43,7 +67,7 @@ namespace ShoppingCartDemo
             while (userInput != 999);
         }
 
-        static public void DisplayMenu(List<Product> products)
+        static private void DisplayMenu(List<Product> products)
         {
             Console.WriteLine("Type article code number to add it to a cart");
             Console.WriteLine("All articles:");
@@ -56,7 +80,7 @@ namespace ShoppingCartDemo
             Console.WriteLine("999. End");
         }
 
-        static public void DisplayProductsToMenu(List<Product> products)
+        static private void DisplayProductsToMenu(List<Product> products)
         {
             if (products != null && products.Count() > 0)
             {
@@ -66,6 +90,15 @@ namespace ShoppingCartDemo
                     Console.WriteLine(string.Format("-----{0}", product.Description));
                 }
             }
+        }
+
+        static private IServiceProvider InitializeStartup()
+        {
+            IServiceCollection services = new ServiceCollection();
+            Startup startup = new Startup();
+            startup.ConfigureServices(services);
+
+            return services.BuildServiceProvider();
         }
     }
 }

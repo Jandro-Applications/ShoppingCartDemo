@@ -22,7 +22,7 @@ namespace ShoppingCartDemo
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(c => c.AddConsole().SetMinimumLevel(LogLevel.Debug));
+            services.AddLogging(c => c.AddConsole().SetMinimumLevel(LogLevel.Trace));
 
             services.AddSingleton<IConfigurationRoot>(Configuration);
             services.AddSingleton<IShoppingCartService, ShoppingCartService>();
