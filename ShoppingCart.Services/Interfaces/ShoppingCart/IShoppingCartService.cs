@@ -8,6 +8,8 @@ namespace ShoppingCart.Services.Interfaces.ShoppingCart
     public interface IShoppingCartService
     {
         Models.ShoppingCart.ShoppingCart Get();
+        Models.ShoppingCart.ShoppingCart GetSummary();
         bool AddToCart(Product product);
+        void ClearCart();
     }
 }

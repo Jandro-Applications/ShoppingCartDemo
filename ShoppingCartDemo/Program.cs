@@ -5,6 +5,7 @@ using ShoppingCart.Services.Models.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 
 namespace ShoppingCartDemo
 {
@@ -16,11 +17,11 @@ namespace ShoppingCartDemo
             var serviceProvider = InitializeStartup();
 
             var productsService = serviceProvider.GetService<IProductsService>();
+            var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
+
             List<Product> products = productsService.GetAll();
 
             DisplayMenu(products);
-
-            var shoppingCartService = serviceProvider.GetService<IShoppingCartService>();
 
             int userInput = 0;
 
@@ -45,7 +46,22 @@ namespace ShoppingCartDemo
                     {
                         if (userInput == 99)
                         {
-                            shoppingCartService.Get();
+                            var shoppingCart = shoppingCartService.GetSummary();
+
+                            if (shoppingCart != null)
+                            {
+                                DisplaySummaryItems(shoppingCart);
+                            }
+                        }
+                        else if (userInput == 88)
+                        {
+                            shoppingCartService.ClearCart();
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("All items have been removed from cart");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("");
+                            DisplayMenu(products);
                         }
                         else if (userInput == 999)
                         {
@@ -76,6 +92,8 @@ namespace ShoppingCartDemo
             DisplayProductsToMenu(products);
 
             Console.WriteLine("");
+            Console.WriteLine("88. Clear cart");
+            Console.WriteLine("");
             Console.WriteLine("99. Summary");
             Console.WriteLine("999. End");
         }
@@ -89,6 +107,23 @@ namespace ShoppingCartDemo
                     Console.WriteLine(string.Format("{0}. {1} - {2} $", product.Code, product.Title, product.Price.ToString()));
                     Console.WriteLine(string.Format("-----{0}", product.Description));
                 }
+            }
+        }
+
+        static private void DisplaySummaryItems(ShoppingCart.Services.Models.ShoppingCart.ShoppingCart shoppingCart)
+        {
+            if (shoppingCart != null && shoppingCart.Items != null && shoppingCart.Items.Count() > 0)
+            {
+                Console.WriteLine("");
+
+                foreach (var item in shoppingCart.Items)
+                {
+                    Console.WriteLine($" => {item.ProductTitle, 10} - Qty {item.Quantity} - Price {item.BasePrice} - Sum {item.Price}");
+                }
+
+                Console.WriteLine($"Total: {shoppingCart.Price}");
+                Console.WriteLine("");
+                Console.WriteLine("");
             }
         }
 

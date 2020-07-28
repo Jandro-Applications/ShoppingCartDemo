@@ -16,9 +16,9 @@ namespace ShoppingCart.Services.Services.Products
         {
             _products = new List<Product>
             {
-                new Product{Id = Guid.NewGuid(), Code = 888, DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Milk", Description = "Whole milk with 3.8% fat", Price = 1.15m },
-                new Product{Id = Guid.NewGuid(), Code = 123, DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Butter", Description = "Butter first class, 250 grams", Price = 0.80m },
-                new Product{Id = Guid.NewGuid(), Code = 456, DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Bread", Description = "Corn bread with seeds", Price = 1.00m }
+                new Product{Id = Guid.NewGuid(), Code = 888, Category = "milk", DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Milk", Description = "Whole milk with 3.8% fat", Price = 1.15m },
+                new Product{Id = Guid.NewGuid(), Code = 123, Category = "butter", DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Butter", Description = "Butter first class, 250 grams", Price = 0.80m },
+                new Product{Id = Guid.NewGuid(), Code = 456, Category = "bread", DateCreated = DateTime.Now, DateModified = DateTime.Now, Title = "Bread", Description = "Corn bread with seeds", Price = 1.00m }
             };
         }
 

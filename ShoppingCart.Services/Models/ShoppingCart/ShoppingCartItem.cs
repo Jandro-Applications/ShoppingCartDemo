@@ -11,5 +11,6 @@ namespace ShoppingCart.Services.Models.ShoppingCart
         public decimal Price { get; set; }
         public int ProductCode { get; set; }
         public string ProductTitle { get; set; }
+        public string ProductCategory { get; set; }
     }
 }
